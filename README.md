@@ -9,7 +9,8 @@
 [📊 Dashboard 1](Dashboard/Dashboard%201.pdf) | 
 [📊 Dashboard 2](Dashboard/Dashboard%202.pdf) | 
 [💾 SQL Queries](sql-queries/) | 
-[📝 Methodology](documentation/METHODOLOGY.md)
+[📝 Methodology](documentation/METHOLODOLOGY.md) |
+[📋 Findings](documentation/FINDINGS.md)
 
 ---
 
