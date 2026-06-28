@@ -6,8 +6,8 @@
 **Technologies:** SQL (Databricks), Excel, Power BI  
 
 **Quick Links:**
-[📊 Dashboard 1](Dashboard/Dashboard%201.pdf) | 
-[📊 Dashboard 2](Dashboard/Dashboard%202.pdf) | 
+[📊 Dashboard 1](Dashboard/Dashboard%201.png) | 
+[📊 Dashboard 2](Dashboard/Dashboard%202.png) | 
 [💾 SQL Queries](sql-queries/) | 
 [📝 Methodology](documentation/METHOLODOLOGY.md) |
 [📋 Findings](documentation/FINDINGS.md)
