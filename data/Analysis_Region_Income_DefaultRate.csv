@@ -1,0 +1,17 @@
+region,income_quartile,total,defaults,default_rate
+North-East,1,270,122,0.4519
+central,1,1901,767,0.4035
+south,1,13973,5076,0.3633
+North,1,16345,5363,0.3281
+North-East,4,269,76,0.2825
+central,2,1901,508,0.2672
+North-East,2,270,71,0.2630
+south,2,13973,3647,0.2610
+south,4,13972,3130,0.2240
+North,2,16345,3596,0.2200
+central,3,1900,404,0.2126
+central,4,1900,396,0.2084
+North-East,3,270,56,0.2074
+south,3,13972,2888,0.2067
+North,4,16344,2914,0.1783
+North,3,16345,2775,0.1698
