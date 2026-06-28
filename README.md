@@ -6,7 +6,7 @@
 **Technologies:** SQL (Databricks), Excel, Power BI  
 
 **Quick Links:**
-[📊 Dashboard 1](#dashboard-1-geographic--income-segmentation) | 
+[📊 Dashboard 1](Dashboard/Dashboard%201.pdf) | 
 [📊 Dashboard 2](#dashboard-2-demographics--loan-structure) | 
 [💾 SQL Queries](#files-structure) | 
 [📝 Methodology](#data-cleaning--methodology)
