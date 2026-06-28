@@ -193,17 +193,20 @@ Analyzed 8 columns with >6% missing values:
 ---
 
 ## Files Structure
+```text
 Loan-Default-Risk-Analysis/
 ├── Dashboard/
-│   ├── Dashboard 1.pdf
-│   ├── Dashboard 2.pdf
-│   ├── Loan_Analysis.pbix
+│   ├── Dashboard_1.pdf
+│   ├── Dashboard_2.pdf
+│   └── Loan_Analysis.pbix
 ├── data/
 ├── documentation/
 │   ├── FINDINGS.md
-│   ├── METHODOLOGY.md
+│   └── METHODOLOGY.md
 ├── sql-queries/
 │   ├── 01_data_cleaning.sql
 │   ├── 02_feature_engineering.sql
-│   ├── 03_analysis_queries.sql
+│   └── 03_analysis_queries.sql
 └── README.md
+```
+
