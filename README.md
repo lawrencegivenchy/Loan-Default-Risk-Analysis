@@ -26,6 +26,25 @@ Comprehensive segmentation analysis identifying key risk factors driving loan de
 
 ---
 
+## Business Questions This Analysis Answers
+
+1. **Which borrower segments have the highest default risk?**
+   - Answer: North-East + Low Income (45.19% default)
+
+2. **Does income level influence loan default?**
+   - Answer: Yes, 85% variation across quartiles (Q1: 34.9% vs Q3: 18.9%)
+
+3. **Which loan products require closer monitoring?**
+   - Answer: Type 2 (34.2%) and p2 purpose (32.7%) loans
+
+4. **Are there regional differences in default behaviour?**
+   - Answer: Yes, 35% variation (North-East: 30.2% vs North: 22.4%)
+
+5. **What is the data quality baseline?**
+   - Answer: 129,950 clean records after removing 18,745 outliers (12.6%)
+
+---
+
 ## Key Findings
 
 ### Dashboard 1: Geographic & Income Segmentation
@@ -131,6 +150,33 @@ Analyzed 8 columns with >6% missing values:
 
 ---
 
+## Data Limitations & Considerations
+
+1. **Static Snapshot**
+   - Dataset represents a fixed point in time (likely 2019–2021)
+   - Does not capture macro-economic shifts (SA repo rate hikes, inflation)
+   - Current application: Baseline for historical analysis, not real-time forecasting
+
+2. **Imputation Trade-Offs**
+   - 25% of `rate_of_interest` and `Interest_rate_spread` imputed using median-by-category
+   - Benefit: Preserves 129K records vs. deletion
+   - Trade-off: Artificial variance reduction
+   - Recommendation: Use imputed columns for segmentation, but acknowledge variance compression in modeling
+
+3. **Geographic Coding**
+   - 4 broad regions (North, North-East, South, Central) mask sub-regional variation
+   - Finer geographic data would improve precision
+
+4. **Unknown Demographics**
+   - 173 records with Unknown Gender + Unknown Age show 100% default (data corruption)
+   - Recommend source system audit before using this dataset in production models
+
+5. **Feature Engineering**
+   - Loan purpose (p1–p4) inferred from default rates, not business definitions
+   - Recommend business owner validation of purpose encoding
+
+---
+
 ## Challenges & Solutions
 
 | Challenge | Solution | Portfolio Value |
@@ -193,6 +239,7 @@ Analyzed 8 columns with >6% missing values:
 ---
 
 ## Files Structure
+
 ```text
 Loan-Default-Risk-Analysis/
 ├── Dashboard/
@@ -210,3 +257,124 @@ Loan-Default-Risk-Analysis/
 └── README.md
 ```
 
+---
+
+## How to Run This Project
+
+### Requirements
+- Databricks SQL workspace (or Spark SQL environment)
+- Power BI Desktop (for viewing dashboards)
+- Excel (for data validation, optional)
+
+### Steps
+
+1. **Data Cleaning:** Run `sql-queries/01_data_cleaning.sql`
+   - Creates `loan_default_final_2` table (129,950 clean records)
+   - Imputes missing values, removes outliers
+   - Execution time: ~2 minutes
+
+2. **Feature Engineering:** Run `sql-queries/02_feature_engineering.sql`
+   - Creates income quartiles, credit score bins, region-income matrix
+   - Generates analysis CSVs to `/data/`
+   - Execution time: ~1 minute
+
+3. **Analysis Queries:** Run `sql-queries/03_analysis_queries.sql`
+   - Validates KPIs match dashboard
+   - Generates results for Power BI
+   - Execution time: <30 seconds
+
+4. **Dashboards:** Open `.pbix` files in Power BI
+   - `Loan_Default_Risk_Analysis.pbix` (Dashboard 1)
+   - `Loan_Default_Risk_Analysis_Dashboard2.pbix` (Dashboard 2)
+   - Refresh data connections to your Databricks environment
+
+### Expected Output
+- 129,950 clean loan records
+- Overall default rate: 24.47%
+- 9 analysis CSVs ready for Power BI
+
+---
+
+## Business Recommendations
+
+### For Credit Risk / Underwriting
+1. **Tighten North-East approval criteria** for income Q1 (45% default is unsustainable)
+2. **Require income verification** for loans >$200K (income is strongest predictor)
+3. **Restrict Type 2 loans** or require additional collateral (34.2% default)
+4. **Flag p2 purpose loans** for manual review (32.7% default)
+
+### For Pricing / Interest Rates
+1. **Price Type 2 loans 2–3% premium** (vs Type 1 @ 22.7% default)
+2. **Price commercial loans 1.5–2% premium** (vs personal @ 23.4% default)
+3. **Price investment properties 1–1.5% premium** (vs primary residences @ 24.1% default)
+4. **Risk-adjust by geography:** North-East 0.5–1% premium relative to North
+
+### For Fraud / Risk Management
+1. **Investigate 173 records** with Unknown Gender + Unknown Age (100% default = systemic issue)
+2. **Audit p2 loan origination** (high default concentration)
+3. **Monitor North-East Q1 segment** for early warning signals
+
+### For Portfolio Management
+1. **Cap North-East Q1 lending** at <5% of portfolio until risk controls in place
+2. **Diversify by region:** Reduce concentration in high-risk regions
+3. **Rebalance loan type mix:** Reduce Type 2 lending to lower-risk Type 1/Type 3
+
+---
+
+## Skills Demonstrated
+
+✓ **Data Cleaning & Imputation** — Strategic imputation preserves 129K+ records vs. deletion  
+✓ **SQL Analysis** — Window functions, aggregations, outlier detection, reproducible queries  
+✓ **Statistical Validation** — Default rate calculations, sanity checks, discrepancy reconciliation  
+✓ **Data Visualization** — Power BI dashboards, conditional formatting, accessibility considerations  
+✓ **Business Communication** — Actionable recommendations, stakeholder-ready insights  
+✓ **Data Governance** — Transparency, quality flagging, documentation, audit trails  
+✓ **Tool Selection** — Excel → SQL migration (tool-to-problem fit)  
+✓ **Iterative Improvement** — Color palette accessibility, feedback integration, methodology refinement
+
+---
+
+## How to Use These Dashboards
+
+**Dashboard 1 → Credit Risk Team**
+- Approval strategy by segment
+- Segment-based underwriting criteria
+- Default rate benchmarks by loan type, region, income
+
+**Dashboard 2 → Pricing Team**
+- Rate adjustment strategy by loan purpose and occupancy
+- Risk-based premium calculation
+- Segment profitability analysis
+
+**Both Dashboards → Analyst Onboarding**
+- Risk factor education
+- Data quality understanding
+- Portfolio composition analysis
+
+---
+
+## Next Steps
+
+- [ ] Build a logistic regression model using these segments as features
+- [ ] A/B test pricing strategy: higher rates for North-East Q1 borrowers
+- [ ] Automate data quality alerts for Unknown-demographic anomaly pattern
+- [ ] Investigate source system for 173 records with 100% default
+- [ ] Portfolio rebalancing: reduce Type 2 lending concentration
+- [ ] Occupancy type risk controls: implement premium for investment properties
+
+---
+
+## Contact
+
+**Email:** lawrencegivenchy@yahoo.com  
+**Portfolio:** lawrenceteemakhafola.vercel.app  
+**GitHub:** github.com/lawrencegivenchy  
+**LinkedIn:** [Your LinkedIn URL]
+
+---
+
+**License:** Open for portfolio/educational use
+
+---
+
+*Last updated: June 2026*
