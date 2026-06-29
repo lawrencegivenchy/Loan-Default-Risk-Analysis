@@ -367,7 +367,7 @@ Loan-Default-Risk-Analysis/
 ## Contact
 
 **Email:** lawrencegivenchy@yahoo.com  
-**Portfolio:** https://lawrenceteemakhafola.vercel.app/  
+**Portfolio:** https://lawrence-makhafola.vercel.app/  
 **GitHub:** https://github.com/lawrencegivenchy  
 **LinkedIn:** [www.linkedin.com/in/lawrence-makhafola-8b0075249]
 
